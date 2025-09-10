@@ -4,980 +4,301 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreshSip - Fresh Juice Delivered</title>
-    <meta name="description" content="Premium fresh juices for every lifestyle - fitness, energy, kids, and more!">
-    <meta name="theme-color" content="#22c55e">
+    <meta name="description" content="Order fresh, healthy juices online. Fitness, energy, kids, and more!">
     
-    <!-- PWA manifest -->
-    <link rel="manifest" href="manifest.json">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRnJlc2hKdWljZSAtIFByZW1pdW0gSnVpY2UgU2hvcCIsInNob3J0X25hbWUiOiJGcmVzaEp1aWNlIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZmZmZmYiLCJ0aGVtZV9jb2xvciI6IiM0ZWNkYzQiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgdmlld0JveD0nMCAwIDI0IDI0JyBmaWxsPSdub25lJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnJTNFJTNDcGF0aCBkPSdtMTIgMmMtNS41MiAwLTEwIDQuNDgtMTAgMTBzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwLTQuNDgtMTAtMTAtMTB6bTEuMTggMTUuMjdjLS40NS4yNy0xLjMgMC0xLjMtLjk5di0yLjI4YzAtMS4yNS44My0yLjI3IDEuODUtMi4yN2guOTJjLjQ3IDAgLjg1LjM4Ljg1Ljg1djMuNjljMCAxLjI3LTEuMyAxLjMxLTEuMzIgMS4wMHonIGZpbGw9JyM0ZWNkYzQnLyUzRSUzQy9zdmclM0UiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
     
-    <!-- Apple PWA meta tags -->
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#4ecdc4">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="FreshSip">
-    <link rel="apple-touch-icon" href="icon-192x192.png">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #22c55e;
-            text-decoration: none;
-        }
-
-        .cart-btn {
-            background: #22c55e;
-            color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .cart-btn:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ef4444;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        /* Categories */
-        .categories {
-            padding: 3rem 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .category-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .category-card.active {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .category-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .category-desc {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-
-        /* Products */
-        .products {
-            padding: 3rem 0;
-            background: #f8fafc;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: slideInUp 0.6s ease forwards;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .product-desc {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .product-benefits {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .benefit-tag {
-            background: #22c55e;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #22c55e;
-        }
-
-        .add-btn {
-            background: #22c55e;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .add-btn:hover {
-            background: #16a34a;
-            transform: scale(1.05);
-        }
-
-        /* Cart Sidebar */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .cart-sidebar.open {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 2rem;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .close-cart {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .cart-content {
-            padding: 2rem;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .cart-item-price {
-            color: #22c55e;
-            font-weight: 600;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .qty-btn {
-            background: #f1f5f9;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .cart-total {
-            padding: 2rem;
-            border-top: 2px solid #eee;
-            text-align: center;
-        }
-
-        .total-price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #22c55e;
-            margin-bottom: 1rem;
-        }
-
-        .checkout-btn {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .checkout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
-        }
-
-        /* Order Form */
-        .order-form {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .order-form.show {
-            display: flex;
-        }
-
-        .form-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #22c55e;
-        }
-
-        .form-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .cancel-btn {
-            background: #6b7280;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .submit-btn {
-            background: #22c55e;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .cart-sidebar {
-                width: 100%;
-                right: -100%;
-            }
-            
-            .category-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: #22c55e;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 1500;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.error {
-            background: #ef4444;
-        }
-
-        .notification.success {
-            background: #22c55e;
-        }
-
-        .payment-method {
-            transition: all 0.3s ease;
-        }
-
-        .payment-method:hover {
-            background: #f8fafc !important;
-            transform: translateY(-2px);
-        }
-
-        .payment-method.selected {
-            border-color: #22c55e !important;
-            background: #f0fdf4 !important;
-        }
-
-        .processing {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        @media (max-width: 480px) {
-            .form-content {
-                padding: 1.5rem !important;
-                margin: 1rem !important;
-            }
-            
-            .payment-method {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">🧃 FreshSip</a>
-            <button class="cart-btn" id="cartBtn">
-                🛒 Cart
-                <span class="cart-count" id="cartCount">0</span>
-            </button>
-        </nav>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">🥤 FreshJuice</h1>
+                <div class="header-actions">
+                    <button class="cart-btn" id="cartBtn">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Fresh Juice for Every Lifestyle</h1>
-            <p>Premium quality juices crafted for fitness enthusiasts, kids, energy seekers, and everyone in between!</p>
-        </div>
-    </section>
-
-    <!-- Categories -->
-    <section class="categories">
-        <div class="container">
-            <h2 class="section-title">Choose Your Category</h2>
-            <div class="category-grid" id="categoryGrid">
-                <div class="category-card active" data-category="all">
-                    <div class="category-icon">🍹</div>
-                    <h3 class="category-title">All Juices</h3>
-                    <p class="category-desc">View our complete collection</p>
+    <!-- Main App Container -->
+    <main class="main-container">
+        <!-- Home Section -->
+        <section class="section home-section" id="homeSection">
+            <div class="container">
+                <div class="hero">
+                    <h2>Fresh, Healthy Juices Delivered</h2>
+                    <p>Choose from our premium collection of juices crafted for every lifestyle</p>
                 </div>
-                <div class="category-card" data-category="fitness">
-                    <div class="category-icon">💪</div>
-                    <h3 class="category-title">Fitness</h3>
-                    <p class="category-desc">Protein-packed & recovery drinks</p>
-                </div>
-                <div class="category-card" data-category="fresh">
-                    <div class="category-icon">🥬</div>
-                    <h3 class="category-title">Fresh</h3>
-                    <p class="category-desc">Pure fruit & vegetable juices</p>
-                </div>
-                <div class="category-card" data-category="energy">
-                    <div class="category-icon">⚡</div>
-                    <h3 class="category-title">Energy</h3>
-                    <p class="category-desc">Natural energy boosters</p>
-                </div>
-                <div class="category-card" data-category="kids">
-                    <div class="category-icon">👶</div>
-                    <h3 class="category-title">Kids</h3>
-                    <p class="category-desc">Kid-friendly & nutritious</p>
-                </div>
-                <div class="category-card" data-category="tasty">
-                    <div class="category-icon">😋</div>
-                    <h3 class="category-title">Tasty</h3>
-                    <p class="category-desc">Indulgent flavor combinations</p>
+                
+                <div class="categories-grid">
+                    <div class="category-card" data-category="fitness" style="background-color: var(--color-bg-1);">
+                        <div class="category-icon">💪</div>
+                        <h3>Fitness Juice</h3>
+                        <p>Protein-rich and post-workout recovery juices</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="fresh" style="background-color: var(--color-bg-3);">
+                        <div class="category-icon">🍊</div>
+                        <h3>Fresh Juice</h3>
+                        <p>Natural fruit juices made fresh daily</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="energy" style="background-color: var(--color-bg-8);">
+                        <div class="category-icon">⚡</div>
+                        <h3>Energy Drinks</h3>
+                        <p>Natural energy boosters and caffeine drinks</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="sugar-free" style="background-color: var(--color-bg-3);">
+                        <div class="category-icon">🌿</div>
+                        <h3>Sugar-Free</h3>
+                        <p>Diabetic-friendly and low-calorie options</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="kids" style="background-color: var(--color-bg-2);">
+                        <div class="category-icon">👶</div>
+                        <h3>Kids Special</h3>
+                        <p>Mild flavors perfect for children</p>
+                    </div>
+                    
+                    <div class="category-card" data-category="tasty" style="background-color: var(--color-bg-7);">
+                        <div class="category-icon">🍫</div>
+                        <h3>Tasty Treats</h3>
+                        <p>Indulgent and dessert-like juice combinations</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products -->
-    <section class="products">
-        <div class="container">
-            <h2 class="section-title">Our Juices</h2>
-            <div class="product-grid" id="productGrid">
-                <!-- Products will be dynamically inserted here -->
+        <!-- Category Section -->
+        <section class="section category-section hidden" id="categorySection">
+            <div class="container">
+                <div class="section-header">
+                    <button class="btn-back" id="backToHome">← Back</button>
+                    <h2 id="categoryTitle">Category</h2>
+                </div>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3 class="cart-title">Your Cart</h3>
-            <button class="close-cart" id="closeCart">×</button>
-        </div>
-        <div class="cart-content" id="cartContent">
-            <!-- Cart items will be dynamically inserted here -->
-        </div>
-        <div class="cart-total">
-            <div class="total-price" id="totalPrice">$0.00</div>
-            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+        <!-- Cart Section -->
+        <section class="section cart-section hidden" id="cartSection">
+            <div class="container">
+                <div class="section-header">
+                    <button class="btn-back" id="backFromCart">← Back</button>
+                    <h2>Your Cart</h2>
+                </div>
+                
+                <div class="cart-content">
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be loaded dynamically -->
+                    </div>
+                    
+                    <div class="cart-empty hidden" id="cartEmpty">
+                        <div class="empty-state">
+                            <div class="empty-icon">🛒</div>
+                            <h3>Your cart is empty</h3>
+                            <p>Add some delicious juices to get started!</p>
+                            <button class="btn btn--primary" id="startShopping">Start Shopping</button>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary" id="cartSummary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="cartSubtotal">₹0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery:</span>
+                            <span id="deliveryFee">₹0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="cartTotal">₹0</span>
+                        </div>
+                        <button class="btn btn--primary btn--full-width" id="proceedToCheckout">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Section -->
+        <section class="section checkout-section hidden" id="checkoutSection">
+            <div class="container">
+                <div class="section-header">
+                    <button class="btn-back" id="backFromCheckout">← Back to Cart</button>
+                    <h2>Checkout</h2>
+                </div>
+                
+                <div class="checkout-content">
+                    <div class="checkout-form">
+                        <h3>Customer Information</h3>
+                        <form id="checkoutForm">
+                            <div class="form-group">
+                                <label class="form-label" for="customerName">Full Name *</label>
+                                <input type="text" class="form-control" id="customerName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="customerPhone">Phone Number *</label>
+                                <input type="tel" class="form-control" id="customerPhone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="customerEmail">Email Address *</label>
+                                <input type="email" class="form-control" id="customerEmail" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="customerAddress">Delivery Address *</label>
+                                <textarea class="form-control" id="customerAddress" rows="3" required></textarea>
+                            </div>
+                            
+                            <h3>Delivery Options</h3>
+                            <div class="delivery-options">
+                                <div class="delivery-option">
+                                    <input type="radio" id="pickup" name="delivery" value="pickup" checked>
+                                    <label for="pickup">
+                                        <div class="option-content">
+                                            <div class="option-title">Store Pickup - Free</div>
+                                            <div class="option-subtitle">Ready in 15-20 minutes</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div class="delivery-option">
+                                    <input type="radio" id="delivery" name="delivery" value="delivery">
+                                    <label for="delivery">
+                                        <div class="option-content">
+                                            <div class="option-title">Home Delivery - ₹49</div>
+                                            <div class="option-subtitle">30-45 minutes</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <h3>Payment Method</h3>
+                            <div class="payment-methods">
+                                <div class="payment-option">
+                                    <input type="radio" id="razorpay" name="payment" value="razorpay" checked>
+                                    <label for="razorpay">
+                                        <div class="option-content">
+                                            <div class="option-title">Razorpay</div>
+                                            <div class="option-subtitle">UPI, Cards, Wallets</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="paytm" name="payment" value="paytm">
+                                    <label for="paytm">
+                                        <div class="option-content">
+                                            <div class="option-title">Paytm</div>
+                                            <div class="option-subtitle">Wallet & UPI</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="phonepe" name="payment" value="phonepe">
+                                    <label for="phonepe">
+                                        <div class="option-content">
+                                            <div class="option-title">PhonePe</div>
+                                            <div class="option-subtitle">UPI payments</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="checkout-summary">
+                        <h3>Order Summary</h3>
+                        <div class="order-items" id="checkoutItems">
+                            <!-- Order items will be loaded dynamically -->
+                        </div>
+                        
+                        <div class="checkout-total">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span id="checkoutSubtotal">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Delivery:</span>
+                                <span id="checkoutDeliveryFee">₹0</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="checkoutTotal">₹0</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn--primary btn--full-width" form="checkoutForm">
+                            Place Order & Pay
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Confirmation Section -->
+        <section class="section confirmation-section hidden" id="confirmationSection">
+            <div class="container">
+                <div class="confirmation-content">
+                    <div class="success-icon">✅</div>
+                    <h2>Order Placed Successfully!</h2>
+                    <p>Thank you for your order. Your delicious juices will be prepared shortly.</p>
+                    
+                    <div class="order-details">
+                        <h3>Order Details</h3>
+                        <div class="detail-row">
+                            <span>Order ID:</span>
+                            <span id="orderId">#FJ2025001</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Estimated Time:</span>
+                            <span id="estimatedTime">15-20 minutes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="confirmation-actions">
+                        <button class="btn btn--primary" id="trackOrder">Track Order</button>
+                        <button class="btn btn--outline" id="continueShoppingFromConfirm">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div class="toast hidden" id="toast">
+        <div class="toast-content">
+            <span id="toastMessage"></span>
         </div>
     </div>
 
-    <!-- Order Form -->
-    <div class="order-form" id="orderForm">
-        <div class="form-content">
-            <h2>Complete Your Order</h2>
-            <form id="customerForm">
-                <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Delivery Address *</label>
-                    <textarea id="address" name="address" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="delivery">Delivery Time</label>
-                    <select id="delivery" name="delivery">
-                        <option value="asap">ASAP</option>
-                        <option value="1hour">1 Hour</option>
-                        <option value="2hours">2 Hours</option>
-                        <option value="tomorrow">Tomorrow</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Special Instructions</label>
-                    <textarea id="notes" name="notes" rows="2" placeholder="Any special requests or notes..."></textarea>
-                </div>
-                <div class="form-buttons">
-                    <button type="button" class="cancel-btn" id="cancelOrder">Cancel</button>
-                    <button type="submit" class="submit-btn">Place Order</button>
-                </div>
-            </form>
-        </div>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Processing your order...</p>
     </div>
 
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-
-    <script>
-        // Product data
-        const products = [
-            // Fitness Category
-            {
-                id: 1,
-                name: "Green Power Protein",
-                category: "fitness",
-                price: 8.99,
-                description: "Spinach, kale, protein powder, banana, and almond milk for post-workout recovery.",
-                benefits: ["High Protein", "Recovery", "Iron Rich"],
-                icon: "💪"
-            },
-            {
-                id: 2,
-                name: "Muscle Builder",
-                category: "fitness",
-                price: 9.49,
-                description: "Whey protein, berries, oats, and coconut water for muscle building.",
-                benefits: ["Muscle Growth", "Antioxidants", "Hydrating"],
-                icon: "🏋️"
-            },
-            {
-                id: 3,
-                name: "Pre-Workout Punch",
-                category: "fitness",
-                price: 7.99,
-                description: "Beetroot, ginger, apple, and natural caffeine for pre-workout energy.",
-                benefits: ["Energy Boost", "Nitric Oxide", "Natural"],
-                icon: "🔥"
-            },
-
-            // Fresh Category
-            {
-                id: 4,
-                name: "Garden Fresh",
-                category: "fresh",
-                price: 6.99,
-                description: "Carrot, cucumber, celery, and parsley - pure vegetable goodness.",
-                benefits: ["Vitamins", "Detox", "Fresh"],
-                icon: "🥕"
-            },
-            {
-                id: 5,
-                name: "Tropical Paradise",
-                category: "fresh",
-                price: 7.49,
-                description: "Pineapple, mango, orange, and coconut water - taste of the tropics.",
-                benefits: ["Vitamin C", "Tropical", "Hydrating"],
-                icon: "🥥"
-            },
-            {
-                id: 6,
-                name: "Berry Blast",
-                category: "fresh",
-                price: 8.49,
-                description: "Mixed berries, apple, and a touch of lime - antioxidant powerhouse.",
-                benefits: ["Antioxidants", "Vitamin C", "Heart Healthy"],
-                icon: "🫐"
-            },
-
-            // Energy Category
-            {
-                id: 7,
-                name: "Morning Kickstart",
-                category: "energy",
-                price: 8.99,
-                description: "Cold brew coffee, banana, dates, and almond butter for sustained energy.",
-                benefits: ["Caffeine", "Sustained Energy", "Natural"],
-                icon: "☕"
-            },
-            {
-                id: 8,
-                name: "Citrus Energizer",
-                category: "energy",
-                price: 6.99,
-                description: "Orange, grapefruit, lemon, ginger, and green tea extract.",
-                benefits: ["Vitamin C", "Natural Caffeine", "Immunity"],
-                icon: "🍊"
-            },
-            {
-                id: 9,
-                name: "Power Green",
-                category: "energy",
-                price: 7.99,
-                description: "Matcha, spinach, apple, and coconut water for clean energy.",
-                benefits: ["Clean Energy", "Antioxidants", "Focus"],
-                icon: "🍵"
-            },
-
-            // Kids Category
-            {
-                id: 10,
-                name: "Rainbow Fun",
-                category: "kids",
-                price: 5.99,
-                description: "Apple, strawberry, and banana - colorful and nutritious fun for kids.",
-                benefits: ["Kid-Friendly", "Natural Sugar", "Vitamins"],
-                icon: "🌈"
-            },
-            {
-                id: 11,
-                name: "Superhero Strength",
-                category: "kids",
-                price: 6.49,
-                description: "Orange, carrot, and mango - packed with beta-carotene for growing kids.",
-                benefits: ["Vitamin A", "Eye Health", "Growing Kids"],
-                icon: "🦸"
-            },
-            {
-                id: 12,
-                name: "Chocolate Banana",
-                category: "kids",
-                price: 6.99,
-                description: "Banana, cocoa powder, and oat milk - healthy chocolate treat.",
-                benefits: ["Healthy Treat", "Calcium", "Natural"],
-                icon: "🍌"
-            },
-
-            // Tasty Category
-            {
-                id: 13,
-                name: "Strawberry Cream Dream",
-                category: "tasty",
-                price: 8.49,
-                description: "Strawberries, vanilla, coconut cream, and a touch of honey.",
-                benefits: ["Indulgent", "Creamy", "Antioxidants"],
-                icon: "🍓"
-            },
-            {
-                id: 14,
-                name: "Chocolate Peanut Butter",
-                category: "tasty",
-                price: 9.49,
-                description: "Cocoa, peanut butter, banana, and oat milk - ultimate comfort drink.",
-                benefits: ["Protein", "Comfort", "Rich Flavor"],
-                icon: "🥜"
-            },
-            {
-                id: 15,
-                name: "Vanilla Caramel Bliss",
-                category: "tasty",
-                price: 8.99,
-                description: "Dates, vanilla, cashews, and sea salt - naturally sweetened indulgence.",
-                benefits: ["Natural Sweetener", "Creamy", "Indulgent"],
-                icon: "🍮"
-            }
-        ];
-
-        // Cart management
-        let cart = JSON.parse(localStorage.getItem('freshsip-cart')) || [];
-        let currentCategory = 'all';
-
-        // DOM elements
-        const cartBtn = document.getElementById('cartBtn');
-        const cartSidebar = document.getElementById('cartSidebar');
-        const closeCart = document.getElementById('closeCart');
-        const cartContent = document.getElementById('cartContent');
-        const cartCount = document.getElementById('cartCount');
-        const totalPrice = document.getElementById('totalPrice');
-        const categoryGrid = document.getElementById('categoryGrid');
-        const productGrid = document.getElementById('productGrid');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        const orderForm = document.getElementById('orderForm');
-        const customerForm = document.getElementById('customerForm');
-        const cancelOrder = document.getElementById('cancelOrder');
-        const notification = document.getElementById('notification');
-
-        // Initialize app
-        function init() {
-            updateCartUI();
-            renderProducts();
-            bindEvents();
-            
-            // Register service worker
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js').catch(console.error);
-            }
-        }
-
-        // Event bindings
-        function bindEvents() {
-            cartBtn.addEventListener('click', () => cartSidebar.classList.add('open'));
-            closeCart.addEventListener('click', () => cartSidebar.classList.remove('open'));
-            
-            categoryGrid.addEventListener('click', (e) => {
-                const categoryCard = e.target.closest('.category-card');
-                if (categoryCard) {
-                    const category = categoryCard.dataset.category;
-                    selectCategory(category);
-                }
-            });
-            
-            productGrid.addEventListener('click', (e) => {
-                if (e.target.classList.contains('add-btn')) {
-                    const productId = parseInt(e.target.dataset.productId);
-                    addToCart(productId);
-                }
-            });
-            
-            checkoutBtn.addEventListener('click', () => {
-                if (cart.length === 0) {
-                    showNotification('Your cart is empty!', 'error');
-                    return;
-                }
-                orderForm.classList.add('show');
-                cartSidebar.classList.remove('open');
-            });
-            
-            cancelOrder.addEventListener('click', () => {
-                orderForm.classList.remove('show');
-            });
-            
-            customerForm.addEventListener('submit', handleOrderSubmit);
-            
-            // Close modals on backdrop click
-            orderForm.addEventListener('click', (e) => {
-                if (e.target === orderForm) {
-                    orderForm.classList.remove('show');
-                }
-            });
-        }
-
-        // Category selection
-        function selectCategory(category) {
-            currentCategory = category;
-            
-            // Update active category
-            document.querySelectorAll('.category-card').forEach(card => {
-                card.classList.remove('active');
-                if (card.dataset.category === category) {
-                    card.classList.add('active');
-                }
-            });
-            
-            renderProducts();
-        }
-
-        // Render products
-        function renderProducts() {
-            const filteredProducts = currentCategory === 'all' 
-                ? products 
-                : products.filter(product => product.category === currentCategory);
-            
-            productGrid.innerHTML = filteredProducts.map(product => `
-                <div class="product-card" style="animation-delay: ${Math.random() * 0.5}s">
-                    <div class="product-image">${product.icon}</div>
-                    <h3 class="product-title">${product.name}</h3>
-                    <p class="product-desc">${product.description}</p>
-                    <div class="product-benefits">
-                        ${product.benefits.map(benefit => `
-                            <span class="benefit-tag">${benefit}</span>
-                        `).join('')}
-                    </div>
-                    <div class="product-footer">
-                        <span class="product-price">$${product.price}</span>
-                        <button class="add-btn" data-product-id="${product.id}">Add to Cart</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Add to cart
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
-            
-            localStorage.setItem('freshsip-cart', JSON.stringify(cart));
-            updateCartUI();
-            showNotification(`${product.name} added to cart!`);
-        }
-
-        // Update cart UI
-        function updateCartUI() {
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    <script src="app.js"></script>
+</body>
+</html>
