@@ -528,6 +528,44 @@
         .notification.show {
             transform: translateX(0);
         }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        .notification.success {
+            background: #22c55e;
+        }
+
+        .payment-method {
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            background: #f8fafc !important;
+            transform: translateY(-2px);
+        }
+
+        .payment-method.selected {
+            border-color: #22c55e !important;
+            background: #f0fdf4 !important;
+        }
+
+        .processing {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            .form-content {
+                padding: 1.5rem !important;
+                margin: 1rem !important;
+            }
+            
+            .payment-method {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
